@@ -66,14 +66,14 @@ namespace Garage1._0
                             Console.Write("Number of Engines:  ");
                             int enginenum = int.Parse(Console.ReadLine());
 
-                            Boat ap = new Boat(name, reg, color, wheelnum, enginenum);
+                            Airplane ap = new Airplane(name, reg, color, wheelnum, enginenum);
                             gh.ParkVehicleinGarage(ap);
 
                             break;
                         case "5":
 
                             VehicleCommonSpecification(out name, out reg, out color, out wheelnum);
-                            Console.Write("Number of Engines:  ");
+                            Console.Write("Cylinder Capacity:  ");
                             int cc = int.Parse(Console.ReadLine());
 
                             Motorcyckle mc = new Motorcyckle(name, reg, color, wheelnum, cc);
@@ -98,10 +98,13 @@ namespace Garage1._0
         {
             Console.Write("Brand/Type:  ");
             name = Console.ReadLine();
+
             Console.Write("Registration Number:  ");
-            reg = Console.ReadLine();
+            reg = Console.ReadLine().ToUpper();
+            
             Console.Write("Color:  ");
             color = Console.ReadLine();
+
             Console.Write("Number of wheel:  ");
             wheelnum = int.Parse(Console.ReadLine());
         }
@@ -145,7 +148,8 @@ namespace Garage1._0
             }
 
             Console.WriteLine("Enter Vehicle Reg num.");
-            string regnum = Console.ReadLine();
+            string regnum = Console.ReadLine().ToUpper();
+
             gh.RemoveVehiclefromGarage(regnum);
 
         }

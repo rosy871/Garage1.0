@@ -16,13 +16,14 @@ namespace Garage1._0
             {
                 //Console.Clear();
 
-                Console.WriteLine("\nGarage Main menu\nPlease navigate through the menu by inputting the number \n(1, 2, 3 ,4, 5, 6 ,0) of your choice"
-                    + "\n1. List all the parked vehicles"
-                    + "\n2. Park vehicle in Garage"
-                    + "\n3. Remove Vehicle from the Garage"
-                    + "\n4. List all the parked vehicle with color"
-                    + "\n5. List all the parked vechicle with color and wheels number "
-                    + "\n6.Remove all the parked vehicles from the Garage"
+                Console.WriteLine("\nGarage Main menu\nPlease navigate through the menu by inputting the number \n(1, 2, 3 ,4, 5, 6 7,,0) of your choice"
+                    + "\n1. List all the parked vehicles."
+                    + "\n2. Park vehicle in Garage."
+                    + "\n3. Remove Vehicle from the Garage."
+                    + "\n4. List all the Parked Vehicle with Color"
+                    + "\n5. List all the Parked Vechicle with Color and Wheels number "
+                    + "\n6. Remove all the Parked Vehicles from the Garage"
+                    + "\n7. List all the Boat whose length is greater or equal to provided length "
                     + "\n0. Exit the application");
 
                 switch (Console.ReadLine())
@@ -51,12 +52,16 @@ namespace Garage1._0
                         Console.WriteLine("All the Vehicles are Removed from the Garage");
                         break;
 
+                    case "7":
+                        gh.ListVehicleByLength(22);
+                        break;
+
 
                     case "0":
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please Enter some Valid Input (0, 1, 2, 3, 4, 5,6)");
+                        Console.WriteLine("Please Enter some Valid Input (0, 1, 2, 3, 4, 5, 6, 7)");
                         break;
                 }
                 //Console.ReadKey();

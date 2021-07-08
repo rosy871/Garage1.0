@@ -16,7 +16,7 @@ namespace Garage1._0
 
         public override string Stats()
         {
-            return base.Stats() + $"no. of engines : {EngineNum} ";
+            return base.Stats() + $"No. of Engines : {EngineNum,3} ";
         }
 
 

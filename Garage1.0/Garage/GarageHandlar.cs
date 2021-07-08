@@ -134,14 +134,19 @@ namespace Garage1._0
             }
         }
 
-        //public void ListVehicleByLength(double length)
-        //{
-        //    //if (garage is Boat boat)
-        //    //{
+        public void ListVehicleByLength(double length)
+        {
+            foreach (var item in garage)
+            {
+                if(item is Boat b)
+                {
+                    if(b.Length>=length)
+                    { Console.WriteLine(b.Stats()); }
+                }
 
-        //    //}
+            }
 
-        //}
+        }
 
         public void EmptyGarage()
         {

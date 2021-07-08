@@ -2,11 +2,10 @@
 {
     interface IVehicle
     {
-        string Color { get; }
-        string Name { get; }
-        string RegisterNum { get; }
-        int WheelsNum { get; }
-
+        public string RegisterNum { get; }
+        public string Color { get; }
+        public int WheelsNum { get; }
+        public string Name { get; }
         public string Stats();
-            }
+    }
 }

@@ -26,7 +26,7 @@ namespace Garage1._0
 
         public bool IsFull
         {
-            get { return index >= Capacity-1; }
+            get { return index >= Capacity; }
 
         }
         public void AddVehicle(Vehicle veh)

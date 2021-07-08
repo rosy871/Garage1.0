@@ -16,7 +16,7 @@ namespace Garage1._0
 
         public override string Stats()
         {
-            return base.Stats() + $"Lenght : {Length} m";
+            return base.Stats() + $"Lenght : {Length,12}m";
         }
     }
 }

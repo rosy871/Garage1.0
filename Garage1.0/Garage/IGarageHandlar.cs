@@ -12,5 +12,6 @@
         void ParkVehicleinGarage(Vehicle v);
         void RemoveVehiclefromGarage(string regNumber);
         void EmptyGarage();
+        public void ListVehicleByLength(double lenght);
     }
 }

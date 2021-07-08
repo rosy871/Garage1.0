@@ -16,7 +16,7 @@ namespace Garage1._0
 
         public override string Stats()
         {
-            return base.Stats() + $"Cylinder Capacity: {CylinderCapacity} cc";
+            return base.Stats() + $"Cylinder Capacity: {CylinderCapacity}cc";
         }
     }
 }
