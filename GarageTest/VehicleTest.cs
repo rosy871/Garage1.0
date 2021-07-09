@@ -20,7 +20,9 @@ namespace GarageTest
             var vechile = new Garage1._0.Vehicle(name, regnum, color, wheelnum);
             string actual = vechile.Stats();
             string expected = $"Name : {name,-13} Register Number : {regnum,-10} color : {color,-10} No. of Wheels : {wheelnum,-5}  ";
-            Assert.AreEqual(actual, expected);
+            string notexpcted = "blablabla";
+            Assert.AreEqual(expected, actual);
+            Assert.AreNotEqual(notexpcted, actual);
 
         }
     }

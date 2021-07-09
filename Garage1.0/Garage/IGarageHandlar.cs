@@ -1,17 +1,17 @@
 ﻿namespace Garage1._0
 {
-    interface IGarageHandlar
+    public interface IGarageHandlar
     {
-        bool GarageIsFull();
-        bool GarageIsEmpty();
+        public bool GarageIsFull();
+        public bool GarageIsEmpty();
 
-        void FindVehicleinGarage(string regnum);
-        void ListAllVehicle();
-        void ListVehicleByColor(string color);
-        void ListVehicleByColorAndWheenum(string color, int wheelnum);
-        void ParkVehicleinGarage(Vehicle v);
-        void RemoveVehiclefromGarage(string regNumber);
-        void EmptyGarage();
+        public void FindVehicleinGarage(string regnum);
+        public void ListAllVehicle();
+        public void ListVehicleByColor(string color);
+        public void ListVehicleByColorAndWheenum(string color, int wheelnum);
+        public void ParkVehicleinGarage(Vehicle v);
+        public void RemoveVehiclefromGarage(string regNumber);
+        public void EmptyGarage();
         public void ListVehicleByLength(double lenght);
     }
 }

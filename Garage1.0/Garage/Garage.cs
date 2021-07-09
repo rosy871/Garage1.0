@@ -7,38 +7,40 @@ using System.Threading.Tasks;
 
 namespace Garage1._0
 {
-   class Garage<T> : IEnumerable<T> where T : Vehicle
-       // class Garage<T> : IEnumerable
+    public class Garage<T> : IEnumerable<T>, IGarage<T> where T : Vehicle
+        // class Garage<T> : IEnumerable
     {
-        private IVehicle[] vehicleArray;
+        private Vehicle[] vehicleArray;
         private int index = 0;
 
 
-        public int Capacity { get; }
+
+
+        public int Capacity { get; set; }
 
 
         public Garage(int capacity)
         {
             Capacity = capacity;
-            vehicleArray = new IVehicle[Capacity];
+            if (Capacity <= 0)
+                Capacity = 1;
+
+            vehicleArray = new Vehicle[Capacity];
 
         }
 
         public bool IsFull
         {
             get { return index >= Capacity; }
-
         }
         public void AddVehicle(Vehicle veh)
         {
-     
-            Console.WriteLine($"Vehicle {index} index num");
             vehicleArray[index] = veh;
             index++;
             Console.WriteLine($"Vehicle {veh.RegisterNum} is parked in Garage");
         }
 
-        public bool IsEmpty
+        public override bool IsEmpty 
         {
             get { return index <= 0; }
         }
@@ -46,9 +48,9 @@ namespace Garage1._0
         {
             index = 0;
         }
-        public IVehicle RemoveVehicle(string regNum)
+        public Vehicle RemoveVehicle(string regNum)
         {
-            IVehicle toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
+            Vehicle toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
             if (toBeRemoved == null)
                 return toBeRemoved;
 
@@ -58,16 +60,12 @@ namespace Garage1._0
                 vehicleArray[i] = vehicleArray[i + 1];
 
             }
-           
-            vehicleArray[index-1] = null;
-             index--;
-              Console.WriteLine(toBeRemoved.Stats());
+
+            vehicleArray[index - 1] = null;
+            index--;
+            Console.WriteLine(toBeRemoved.Stats());
             //Console.WriteLine($"Vehicle {toBeRemoved.RegisterNum} is removed from Garage");
             return toBeRemoved;
-
-
-
-
         }
 
         //public void showParkedVehicle()
@@ -85,7 +83,7 @@ namespace Garage1._0
         //{
         //    IVehicle toFind = vehicleArray.Where(v => v != null && v.RegisterNum == regnum).FirstOrDefault();
         //    return toFind;
-           
+
         //}
 
         //public IEnumerable<IVehicle> FindVehicleByColor(string color)
@@ -93,7 +91,7 @@ namespace Garage1._0
         //   var results = vehicleArray.Where(v => v != null && v.Color == color).ToArray();
         //     return results;
         //}
-            
+
         // //public Vehicle[] FindVehicleByColorAndWheelNum(string color, int wheelnum)
         // public IEnumerable<IVehicle> FindVehicleByColorAndWheelNum(string color, int wheelnum)
         //{
@@ -114,15 +112,15 @@ namespace Garage1._0
 
         public IEnumerator<T> GetEnumerator()
         {
-               
+
             Console.WriteLine("lenght of filled array : " + vehicleArray.Length);
             for (int i = 0; i < index; i++)
             {
                 if (vehicleArray[i] is T veh)
                 {
-                yield return (veh);
+                    yield return (veh);
                 }
-                  
+
 
             }
             //foreach (var item in vehicleArray)
@@ -131,7 +129,7 @@ namespace Garage1._0
             //}
         }
 
-       
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
