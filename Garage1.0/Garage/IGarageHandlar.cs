@@ -9,7 +9,7 @@
         public void ListAllVehicle();
         public void ListVehicleByColor(string color);
         public void ListVehicleByColorAndWheenum(string color, int wheelnum);
-        public void ParkVehicleinGarage(Vehicle v);
+        void ParkVehicleinGarage(Vehicle v);
         public void RemoveVehiclefromGarage(string regNumber);
         public void EmptyGarage();
         public void ListVehicleByLength(double lenght);

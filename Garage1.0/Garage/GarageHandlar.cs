@@ -8,7 +8,20 @@ namespace Garage1._0
 {
     public class GarageHandlar : IGarageHandlar
     {
-        Garage<Vehicle> garage = new Garage<Vehicle>(5);
+        IGarage<Vehicle> garage = new Garage<Vehicle>(5);
+
+        //public GarageHandlar(object obj) {
+        //  garage = new Garage<Vehicle>(5);
+        // }
+        //public GarageHandlar(IGarage<Vehicle> gObj)
+        //{
+
+        //    gObj = new Garage<Vehicle>(5);
+        //    Console.WriteLine("Garage with obj");
+        //    //gObj.initializeVehicleArr(5);
+        //    garage = gObj;
+        //    Console.WriteLine("Garage is again obj");
+        //}
 
         public bool GarageIsFull()
         {
@@ -31,12 +44,9 @@ namespace Garage1._0
                     i++;
                     Console.WriteLine(i + " " + item.Stats());
                 }
-
             }
             else
                 Console.WriteLine("Garage is Empty");
-
-
         }
 
         public void ParkVehicleinGarage(Vehicle v)
@@ -62,9 +72,7 @@ namespace Garage1._0
                     garage.AddVehicle(v);
                     Console.WriteLine($"Vehicle {v.Name} with Regnum: {v.RegisterNum} is now parked in Garage ");
                 }
-
             }
-
         }
 
         public void RemoveVehiclefromGarage(string regNumber)
@@ -78,16 +86,20 @@ namespace Garage1._0
                     Console.WriteLine($"Vehicle with regnum : {regNumber} is not parked in the Garage");
                 else
                     Console.WriteLine($"Vehicle {v.Name} with RegNumber {v.RegisterNum} is removed from Garage ");
-
             }
-
-
         }
 
         public void FindVehicleinGarage(string regnum)
         {
             var result = garage.Where(v => v != null && v.RegisterNum == regnum).FirstOrDefault();
-            Console.WriteLine(result.Stats());
+            if (result == null)
+            {
+                Console.WriteLine("Vehicle not found");
+            }
+            else
+            {
+                Console.WriteLine(result.Stats());
+            }
             //foreach (var item in garage)
             //{
             //    if (item.RegisterNum == regnum)
@@ -134,16 +146,24 @@ namespace Garage1._0
             }
         }
 
-        public void ListVehicleByLength(double length)
+        public void ListVehicleByLength(double length) //´rename lenght to minimum length
         {
+            bool found = false;
             foreach (var item in garage)
             {
-                if(item is Boat b)
+                if (item is Boat b)
                 {
-                    if(b.Length>=length)
-                    { Console.WriteLine(b.Stats()); }
+                    if (b.Length >= length)
+                    {
+                        found = true;
+                        Console.WriteLine(b.Stats());
+                    }
                 }
 
+            }
+            if (!found)
+            {
+                { Console.WriteLine("Boat does not exist"); }
             }
 
         }

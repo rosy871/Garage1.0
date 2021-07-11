@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 namespace Garage1._0
 {
     public class Garage<T> : IEnumerable<T>, IGarage<T> where T : Vehicle
-        // class Garage<T> : IEnumerable
     {
-        private Vehicle[] vehicleArray;
-        private int index = 0;
+        private IVehicle[] vehicleArray;
+        private int index;
 
 
 
@@ -21,26 +20,51 @@ namespace Garage1._0
 
         public Garage(int capacity)
         {
+            index = 0;
             Capacity = capacity;
             if (Capacity <= 0)
                 Capacity = 1;
 
+            Console.WriteLine("constructor with capacity");
             vehicleArray = new Vehicle[Capacity];
 
         }
+        //public void initializeVehicleArr(int cap)
+        //{
+        //    Console.WriteLine("is this crazy");
+        //    Capacity = cap;
+        //    vehicleArray = new Vehicle[Capacity];
+        //}
+
+        //public Garage()
+        //{
+        //    Capacity = 5;
+        //    if (Capacity <= 0)
+        //        Capacity = 1;
+        //    Console.WriteLine("is this crazy 2");
+        
+        //    vehicleArray = new Vehicle[Capacity];
+
+        //}
+
+        public bool IsFull2()
+        {
+            return true;
+        }
+        
 
         public bool IsFull
         {
             get { return index >= Capacity; }
         }
-        public void AddVehicle(Vehicle veh)
+        public void AddVehicle(IVehicle veh)
         {
             vehicleArray[index] = veh;
             index++;
             Console.WriteLine($"Vehicle {veh.RegisterNum} is parked in Garage");
         }
 
-        public override bool IsEmpty 
+        public bool IsEmpty 
         {
             get { return index <= 0; }
         }
@@ -48,9 +72,9 @@ namespace Garage1._0
         {
             index = 0;
         }
-        public Vehicle RemoveVehicle(string regNum)
+        public IVehicle RemoveVehicle(string regNum)
         {
-            Vehicle toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
+            IVehicle toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
             if (toBeRemoved == null)
                 return toBeRemoved;
 
@@ -63,7 +87,7 @@ namespace Garage1._0
 
             vehicleArray[index - 1] = null;
             index--;
-            Console.WriteLine(toBeRemoved.Stats());
+            //Console.WriteLine(toBeRemoved.Stats());
             //Console.WriteLine($"Vehicle {toBeRemoved.RegisterNum} is removed from Garage");
             return toBeRemoved;
         }
