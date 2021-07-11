@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage1._0
 {
-    interface IUI
+    public interface IUI
     {
         void StartProj();
     }

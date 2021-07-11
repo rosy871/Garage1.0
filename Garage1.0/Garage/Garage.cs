@@ -11,10 +11,6 @@ namespace Garage1._0
     {
         private IVehicle[] vehicleArray;
         private int index;
-
-
-
-
         public int Capacity { get; set; }
 
 
@@ -25,33 +21,15 @@ namespace Garage1._0
             if (Capacity <= 0)
                 Capacity = 1;
 
-            Console.WriteLine("constructor with capacity");
             vehicleArray = new Vehicle[Capacity];
 
         }
-        //public void initializeVehicleArr(int cap)
-        //{
-        //    Console.WriteLine("is this crazy");
-        //    Capacity = cap;
-        //    vehicleArray = new Vehicle[Capacity];
-        //}
-
-        //public Garage()
-        //{
-        //    Capacity = 5;
-        //    if (Capacity <= 0)
-        //        Capacity = 1;
-        //    Console.WriteLine("is this crazy 2");
-        
-        //    vehicleArray = new Vehicle[Capacity];
-
-        //}
 
         public bool IsFull2()
         {
             return true;
         }
-        
+
 
         public bool IsFull
         {
@@ -64,7 +42,7 @@ namespace Garage1._0
             Console.WriteLine($"Vehicle {veh.RegisterNum} is parked in Garage");
         }
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             get { return index <= 0; }
         }
@@ -136,8 +114,6 @@ namespace Garage1._0
 
         public IEnumerator<T> GetEnumerator()
         {
-
-            Console.WriteLine("lenght of filled array : " + vehicleArray.Length);
             for (int i = 0; i < index; i++)
             {
                 if (vehicleArray[i] is T veh)

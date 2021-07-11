@@ -5,13 +5,13 @@ namespace Garage1._0
 
     class Program
     {
-        static IGarageHandlar gh = new GarageHandlar();
 
         static void Main(string[] args)
         {
-            IUI ui = new GarageUI();
+            IGarageHandlar gh = new GarageHandlar();
+            IUI ui = new GarageUI(gh);
             ui.StartProj();
-           
+
 
 
             //Car c=new Car("car","qwe","black",4,"deisel");
@@ -63,11 +63,5 @@ namespace Garage1._0
 
             //gar1.showParkedVehicle();
         }
-
-      
-
-       
-
-       
     }
 }

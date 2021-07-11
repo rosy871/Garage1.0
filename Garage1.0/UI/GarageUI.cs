@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Garage1._0
 {
-    class GarageUI : IUI
+    public class GarageUI : IUI
     {
         VehicleUI vui = new VehicleUI();
-        IGarageHandlar gh = new GarageHandlar();
+        IGarageHandlar gh;
+
+        public GarageUI(IGarageHandlar ghObj)
+        {
+            gh = ghObj;
+        }
+
         public void StartProj()
         {
             while (true)
