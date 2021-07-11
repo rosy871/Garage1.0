@@ -18,6 +18,7 @@ namespace GarageTest
         [TestMethod]
         public void StartProj_boolchk_returnfalse()
         {
+            //problem in read line
             gMock = new Mock<IGarageHandlar>();
 
             string name1 = "audi";
