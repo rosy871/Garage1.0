@@ -8,19 +8,19 @@ namespace Garage1._0
 {
     class VehicleUI
     {
-        
-        public void ParkVehicleinGarage(IGarageHandlar gh)
+
+        public void ParkVehicleinGarage(IGarageHandlar gh, IUI ui)
         {
             while (true)
             {
                 if (gh.GarageIsFull())
                 {
-                    Console.WriteLine("\nGarage is Full");
+                    ui.Print("\nGarage is Full");
                     return;
                 }
                 string name, reg, color;
                 int wheelnum;
-                Console.WriteLine("\nPress 1 for Parking Car\n"
+                ui.Print("\nPress 1 for Parking Car\n"
                     + "Press 2 for Parking Buss\n"
                     + "Press 3 for parking Boat\n"
                     + "Press 4 for parking Aeroplane\n"
@@ -29,55 +29,55 @@ namespace Garage1._0
                     );
                 try
                 {
-                    switch (Console.ReadLine())
+                    switch (ui.GetInput())
                     {
                         case "1":
 
-                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum);
+                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
 
-                            Console.Write("Fuel Type:  ");
-                            string fuel = Console.ReadLine();
+                            ui.PrintSL("Fuel Type:  ");
+                            string fuel = ui.GetInput();
 
                             Car c = new Car(name, reg, color, wheelnum, fuel);
-                            gh.ParkVehicleinGarage(c);
+                            gh.ParkVehicleinGarage(c, ui);
 
                             break;
 
                         case "2":
-                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum);
-                            Console.Write("Number of seats:  ");
-                            int seatnum = int.Parse(Console.ReadLine());
+                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
+                            ui.PrintSL("Number of seats:  ");
+                            int seatnum = int.Parse(ui.GetInput());
 
                             Bus b = new Bus(name, reg, color, wheelnum, seatnum);
-                            gh.ParkVehicleinGarage(b);
+                            gh.ParkVehicleinGarage(b, ui);
                             break;
 
                         case "3":
-                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum);
-                            Console.Write("Length of Boat:  ");
-                            double length = double.Parse(Console.ReadLine());
+                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
+                            ui.PrintSL("Length of Boat:  ");
+                            double length = double.Parse(ui.GetInput());
 
                             Boat bt = new Boat(name, reg, color, wheelnum, length);
-                            gh.ParkVehicleinGarage(bt);
+                            gh.ParkVehicleinGarage(bt, ui);
                             break;
 
                         case "4":
-                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum);
-                            Console.Write("Number of Engines:  ");
-                            int enginenum = int.Parse(Console.ReadLine());
+                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
+                            ui.PrintSL("Number of Engines:  ");
+                            int enginenum = int.Parse(ui.GetInput());
 
                             Airplane ap = new Airplane(name, reg, color, wheelnum, enginenum);
-                            gh.ParkVehicleinGarage(ap);
+                            gh.ParkVehicleinGarage(ap, ui);
 
                             break;
                         case "5":
 
-                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum);
-                            Console.Write("Cylinder Capacity:  ");
-                            int cc = int.Parse(Console.ReadLine());
+                            VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
+                            ui.PrintSL("Cylinder Capacity:  ");
+                            int cc = int.Parse(ui.GetInput());
 
                             Motorcyckle mc = new Motorcyckle(name, reg, color, wheelnum, cc);
-                            gh.ParkVehicleinGarage(mc);
+                            gh.ParkVehicleinGarage(mc, ui);
 
                             break;
                         case "0":
@@ -86,73 +86,89 @@ namespace Garage1._0
 
 
                         default:
-                            Console.WriteLine("fel input press(1,2,3,4)");
+                            ui.Print("fel input press(1,2,3,4)");
                             break;
                     }
-                }catch(Exception e)
-                { Console.WriteLine(e.Message); }
+                }
+                catch (Exception e)
+                { ui.Print(e.Message); }
             }
         }
 
-        private static void VehicleCommonSpecification(out string name, out string reg, out string color, out int wheelnum)
+
+        private static void VehicleCommonSpecification(out string name, out string reg, out string color, out int wheelnum, IUI ui)
         {
-            Console.Write("Brand/Type:  ");
-            name = Console.ReadLine();
+            ui.PrintSL("Brand/Type:  ");
+            name = ui.GetInput();
 
-            Console.Write("Registration Number:  ");
-            reg = Console.ReadLine().ToUpper();
-            
-            Console.Write("Color:  ");
-            color = Console.ReadLine();
+            ui.PrintSL("Registration Number:  ");
+            reg = ui.GetInput().ToUpper();
 
-            Console.Write("Number of wheel:  ");
-            wheelnum = int.Parse(Console.ReadLine());
+
+            ui.PrintSL("Color:  ");
+            color = ui.GetInput();
+
+            ui.PrintSL("Number of wheel:  ");
+            wheelnum = int.Parse(ui.GetInput());
         }
 
-       public void ShowVehicleWithColorAndWheel(IGarageHandlar gh)
-        {
-            if (gh.GarageIsEmpty())
-            {
-                Console.WriteLine("\nGarage is Empty.");
-                return;
-            }
-
-            Console.WriteLine("Enter Color");
-            string color = Console.ReadLine();
-            Console.WriteLine("Enter Number of Wheels");
-            int wheelnum = int.Parse(Console.ReadLine());
-
-            gh.ListVehicleByColorAndWheenum(color, wheelnum);
-        }
-
-        public void ShowVehiclesWithColor(IGarageHandlar gh)
+        public void ListVehicleByLength(IGarageHandlar gh, IUI ui)
         {
             if (gh.GarageIsEmpty())
             {
-                Console.WriteLine("\nGarage is Empty.");
+                ui.Print("\nGarage is Empty.\n");
                 return;
             }
 
-            Console.WriteLine("Enter Color");
-            string color = Console.ReadLine();
-            gh.ListVehicleByColor(color);
-
+            ui.Print("Enter Minimum Length:  ");
+            double length = int.Parse(ui.GetInput());
+            gh.ListVehicleByLength(length, ui);
         }
 
-       public void RemoveVechicleFromGarage(IGarageHandlar gh)
+        public void ShowVehicleWithColorAndWheel(IGarageHandlar gh, IUI ui)
         {
             if (gh.GarageIsEmpty())
             {
-                Console.WriteLine("\nGarage is Empty.");
+                ui.Print("\nGarage is Empty.");
                 return;
             }
 
-            Console.WriteLine("Enter Vehicle Reg num.");
-            string regnum = Console.ReadLine().ToUpper();
+            ui.PrintSL("Enter Color:  ");
+            string color = ui.GetInput();
+            ui.PrintSL("Enter Number of Wheels:  ");
+            int wheelnum = int.Parse(ui.GetInput());
 
-            gh.RemoveVehiclefromGarage(regnum);
+            gh.ListVehicleByColorAndWheenum(color, wheelnum, ui);
+        }
+
+        public void ShowVehiclesWithColor(IGarageHandlar gh, IUI ui)
+        {
+            if (gh.GarageIsEmpty())
+            {
+                ui.Print("\nGarage is Empty.");
+                return;
+            }
+
+            ui.PrintSL("Enter Color:  ");
+            string color = ui.GetInput();
+            gh.ListVehicleByColor(color, ui);
 
         }
-       
+
+        public void RemoveVechicleFromGarage(IGarageHandlar gh, IUI ui)
+        {
+            if (gh.GarageIsEmpty())
+            {
+                ui.Print("\nGarage is Empty.");
+                return;
+            }
+
+            ui.PrintSL("Enter Vehicle Reg num:  ");
+            string regnum = ui.GetInput().ToUpper();
+
+            gh.RemoveVehiclefromGarage(regnum, ui);
+
+        }
+
     }
 }

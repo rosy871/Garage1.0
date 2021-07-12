@@ -14,14 +14,14 @@ namespace GarageTest
     {
 
         [TestMethod]
-        public void Constructor_NegativeCapacity_Returns_1()
+        public void Constructor_NegativeCapacity_Returns1()
         {
             //Arrange
             int expected = 1;
             const int capacity = -10;
 
             //Act
-           Garage<Vehicle> garage1 = new Garage<Vehicle>(capacity);
+            Garage<Vehicle> garage1 = new Garage<Vehicle>(capacity);
             //Assert
             Assert.AreEqual(garage1.Capacity, expected);
         }
@@ -34,23 +34,19 @@ namespace GarageTest
             const int capacity = 2;
 
             //Act
-           Garage<Vehicle> garage = new Garage<Vehicle>(capacity);
+            Garage<Vehicle> garage = new Garage<Vehicle>(capacity);
 
-            string name = "audi";
-            string regnum = "abc123";
-            string color = "red";
-            int wheelnum = 4;
-            var veh = new Vehicle(name, regnum, color, wheelnum);
+            var veh1 = new Car("Audi", "AUD123", "red", 4, "diesel");
+            var veh2 = new Car("Audi", "AUD456", "red", 4, "Patrol");
 
-            garage.AddVehicle(veh);
 
-            string name2 = "audi";
-            string regnum2 = "xyz456";
-            string color2 = "red";
-            int wheelnum2 = 4;
-            var veh2 = new Vehicle(name2, regnum2, color2, wheelnum2);
-
+            garage.AddVehicle(veh1);
             garage.AddVehicle(veh2);
+
+            Assert.IsNotNull(garage);
+
+
+
 
 
             //Assert
@@ -64,55 +60,35 @@ namespace GarageTest
 
             const int capacity = 2;
 
-            //Act
-           Garage<Vehicle> garage = new Garage<Vehicle>(capacity);
+            Garage<Vehicle> garage = new Garage<Vehicle>(capacity);
 
-            string name = "audi";
-            string regnum = "abc123";
-            string color = "red";
-            int wheelnum = 4;
-            var veh = new Vehicle(name, regnum, color, wheelnum);
-
-            garage.AddVehicle(veh);
-
-            string name2 = "audi";
-            string regnum2 = "xyz456";
-            string color2 = "red";
-            int wheelnum2 = 4;
-            var veh2 = new Vehicle(name2, regnum2, color2, wheelnum2);
-
+            var veh1 = new Car("Audi", "AUD123", "red", 4, "diesel");
+            var veh2 = new Car("Audi", "AUD456", "red", 4, "Patrol");
+            garage.AddVehicle(veh1);
             garage.AddVehicle(veh2);
 
-            var removeVeh = garage.RemoveVehicle(regnum2);
+            //Act
+            var removeVeh = garage.RemoveVehicle("AUD123");
 
             //Assert
-            Assert.AreEqual(removeVeh, veh2);
+            Assert.AreEqual(veh1, removeVeh);
 
             string notExistingRegNum = "aab993";
             var removeIncorectVeh = garage.RemoveVehicle(notExistingRegNum);
-            Assert.AreEqual(removeIncorectVeh, null);
+            Assert.AreEqual(null, removeIncorectVeh);
         }
 
 
         [TestMethod]
         public void IsFull_CheckVehicleArray_ReturnsTrueOrFalse()
         {
+
             Garage<Vehicle> garage = new Garage<Vehicle>(2);
 
-            string name = "audi";
-            string regnum = "abc123";
-            string color = "red";
-            int wheelnum = 4;
-            var veh = new Vehicle(name, regnum, color, wheelnum);
+            var veh1 = new Bus("schoolbus", "AUD123", "red", 4, 22);
+            var veh2 = new Car("Audi", "AUD456", "red", 4, "Patrol");
 
-            garage.AddVehicle(veh);
-
-            string name2 = "audi";
-            string regnum2 = "xyz456";
-            string color2 = "red";
-            int wheelnum2 = 4;
-            var veh2 = new Vehicle(name2, regnum2, color2, wheelnum2);
-
+            garage.AddVehicle(veh1);
             garage.AddVehicle(veh2);
 
             Assert.IsTrue(garage.IsFull);
@@ -123,16 +99,11 @@ namespace GarageTest
         {
             Garage<Vehicle> garage = new Garage<Vehicle>(2);
 
-            bool emptyArray = garage.IsEmpty;
-            Assert.IsTrue(emptyArray);
+            Assert.IsTrue(garage.IsEmpty);
 
-            string name = "audi";
-            string regnum = "abc123";
-            string color = "red";
-            int wheelnum = 4;
-            var veh = new Vehicle(name, regnum, color, wheelnum);
+            var veh1 = new Motorcyckle("Honda", "hon111", "black", 1, 120);
 
-            garage.AddVehicle(veh);
+            garage.AddVehicle(veh1);
             Assert.IsFalse(garage.IsEmpty);
 
         }

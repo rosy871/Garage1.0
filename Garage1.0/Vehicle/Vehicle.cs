@@ -27,7 +27,7 @@ namespace Garage1._0
 
         public virtual string Stats()
         {
-            return $"Name : {Name,-13} Register Number : {RegisterNum,-10} color : {Color,-10} No. of Wheels : {WheelsNum,-5}  ";
+            return $"Name : {Name,-11} Register Number : {RegisterNum,-10} color : {Color,-10} No. of Wheels : {WheelsNum,-5}  ";
         } 
 
 

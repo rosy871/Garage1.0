@@ -5,18 +5,18 @@ using System.Collections;
 
 namespace Garage1._0
 {
-    public interface IGarage<T> : IEnumerable<T>  where T : Vehicle
+    public interface IGarage<T> : IEnumerable<T> where T : Vehicle
     {
         int Capacity { get; set; }
         bool IsEmpty { get; }
         bool IsFull { get; }
 
-       // void initializeVehicleArr(int cap);
+        // void initializeVehicleArr(int cap);
         public void AddVehicle(IVehicle veh);
         void EmptyGarage();
         new IEnumerator<T> GetEnumerator();
         IVehicle RemoveVehicle(string regNum);
 
-         public bool IsFull2();
+        //public bool IsFull2();
     }
 }

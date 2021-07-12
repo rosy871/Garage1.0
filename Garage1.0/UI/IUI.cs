@@ -8,6 +8,8 @@ namespace Garage1._0
 {
     public interface IUI
     {
-        void StartProj();
+        string GetInput();
+        public void Print(string str);
+        public void PrintSL(string str);
     }
 }

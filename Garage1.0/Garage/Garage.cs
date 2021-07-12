@@ -25,10 +25,10 @@ namespace Garage1._0
 
         }
 
-        public bool IsFull2()
-        {
-            return true;
-        }
+        //public bool IsFull2()
+        //{
+        //    return true;
+        //}
 
 
         public bool IsFull
@@ -52,11 +52,12 @@ namespace Garage1._0
         }
         public IVehicle RemoveVehicle(string regNum)
         {
-            IVehicle toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
+            var toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
             if (toBeRemoved == null)
                 return toBeRemoved;
 
             int ind = Array.IndexOf(vehicleArray, toBeRemoved);
+            Console.WriteLine("index of removed veh" + ind);
             for (int i = ind; i < vehicleArray.Length - 1; i++)
             {
                 vehicleArray[i] = vehicleArray[i + 1];

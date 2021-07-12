@@ -9,8 +9,9 @@ namespace Garage1._0
         static void Main(string[] args)
         {
             IGarageHandlar gh = new GarageHandlar();
-            IUI ui = new GarageUI(gh);
-            ui.StartProj();
+            IUI ui = new ConsoleUI();
+            GarageUI gi = new GarageUI(gh, ui);
+            gi.StartProj();
 
 
 

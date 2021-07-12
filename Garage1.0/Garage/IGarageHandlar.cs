@@ -5,13 +5,20 @@
         public bool GarageIsFull();
         public bool GarageIsEmpty();
 
-        public void FindVehicleinGarage(string regnum);
-        public void ListAllVehicle();
-        public void ListVehicleByColor(string color);
-        public void ListVehicleByColorAndWheenum(string color, int wheelnum);
-        void ParkVehicleinGarage(Vehicle v);
-        public void RemoveVehiclefromGarage(string regNumber);
-        public void EmptyGarage();
-        public void ListVehicleByLength(double lenght);
+        public void FindVehicleinGarage(string regnum, IUI ui);
+        public void ListAllVehicle(IUI ui);
+        public void ListVehicleByColor(string color, IUI ui);
+        public void ListVehicleByColorAndWheenum(string color, int wheelnum, IUI ui);
+        void ParkVehicleinGarage(Vehicle v, IUI ui);
+        public void RemoveVehiclefromGarage(string regNumber, IUI ui);
+        public void EmptyGarage(IUI ui);
+        public void ListVehicleByLength(double lenght, IUI ui);
+        public void ListAllCars(IUI ui);
+        public void ListAllBus(IUI ui);
+        public void ListAllBoat(IUI ui);
+        public void ListAllMotorcyckle(IUI ui);
+        public void ListAllAirplane(IUI ui);
+
+
     }
 }

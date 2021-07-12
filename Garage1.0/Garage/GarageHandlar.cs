@@ -13,15 +13,7 @@ namespace Garage1._0
         //public GarageHandlar(object obj) {
         //  garage = new Garage<Vehicle>(5);
         // }
-        //public GarageHandlar(IGarage<Vehicle> gObj)
-        //{
 
-        //    gObj = new Garage<Vehicle>(5);
-        //    Console.WriteLine("Garage with obj");
-        //    //gObj.initializeVehicleArr(5);
-        //    garage = gObj;
-        //    Console.WriteLine("Garage is again obj");
-        //}
 
         public bool GarageIsFull()
         {
@@ -34,143 +26,212 @@ namespace Garage1._0
         }
 
         // ListAllVehicleInGarage
-        public void ListAllVehicle()
+        public void ListAllVehicle(IUI ui)
         {
             if (!garage.IsEmpty)
             {
                 int i = 0;
+                ui.Print("\n---All Vechicles Lists:---");
                 foreach (var item in garage)
                 {
                     i++;
-                    Console.WriteLine(i + " " + item.Stats());
+                    ui.Print(i + " " + item.Stats());
                 }
             }
             else
-                Console.WriteLine("Garage is Empty");
+                ui.Print("\nGarage is Empty");
         }
 
-        public void ParkVehicleinGarage(Vehicle v)
+        public void ParkVehicleinGarage(Vehicle v, IUI ui)
         {
-            if (garage.IsFull)
-                Console.WriteLine("Garage if full");
-
-
-            else
+            var result = garage.Where(veh => veh.RegisterNum == v.RegisterNum).FirstOrDefault();
+            if (result == null)
             {
-                bool alreadyExist = false;
-                foreach (var ve in garage)
-                {
-                    if (ve.RegisterNum == v.RegisterNum)
-                    {
-                        alreadyExist = true;
-                        Console.WriteLine("Two Vehicles canot have same Register Number");
-                        break;
-                    }
-                }
-                if (!alreadyExist)
-                {
-                    garage.AddVehicle(v);
-                    Console.WriteLine($"Vehicle {v.Name} with Regnum: {v.RegisterNum} is now parked in Garage ");
-                }
+                garage.AddVehicle(v);
             }
+            else
+                ui.Print("\nTwo Vehicles canot have same Register Number");
+
+
+
         }
 
-        public void RemoveVehiclefromGarage(string regNumber)
+        public void RemoveVehiclefromGarage(string regNumber, IUI ui)
         {
-            if (garage.IsEmpty)
-                Console.WriteLine("garage is Empty");
+
+            var v = garage.RemoveVehicle(regNumber);
+            if (v == null)
+                ui.Print($"\nVehicle with regnum : {regNumber} is Not Parked in the Garage");
             else
-            {
-                var v = garage.RemoveVehicle(regNumber);
-                if (v == null)
-                    Console.WriteLine($"Vehicle with regnum : {regNumber} is not parked in the Garage");
-                else
-                    Console.WriteLine($"Vehicle {v.Name} with RegNumber {v.RegisterNum} is removed from Garage ");
-            }
+                ui.Print($"\nVehicle {v.Name} with RegNumber {v.RegisterNum} is Removed from Garage ");
+
         }
 
-        public void FindVehicleinGarage(string regnum)
+        public void FindVehicleinGarage(string regnum, IUI ui)
         {
             var result = garage.Where(v => v != null && v.RegisterNum == regnum).FirstOrDefault();
             if (result == null)
             {
-                Console.WriteLine("Vehicle not found");
+                ui.Print("\nVehicle not found");
             }
             else
             {
-                Console.WriteLine(result.Stats());
+
+                ui.Print("\n" + result.Stats());
             }
-            //foreach (var item in garage)
-            //{
-            //    if (item.RegisterNum == regnum)
-            //    {
-            //        Console.WriteLine(item.Stats());
-            //        return;
 
-            //    }
-
-            //}
-
-            //  Console.WriteLine($"Vehicle with {regnum} is not parked in the Garage");
 
         }
 
-        public void ListVehicleByColor(string color)
+        public void ListVehicleByColor(string color, IUI ui)
         {
             var results = garage.Where(v => v != null && v.Color == color).ToArray();
             //return results;
             //var v = garage.FindVehicleByColor(color);
             if (results.Length == 0)
-                Console.WriteLine($"Vehicles with {color} is not parked in Garage");
+                ui.Print($"\nVehicles with {color} is Not Parked in Garage");
             else
             {
-
+                ui.Print($"\nVehicles with {color} Lists: ");
                 foreach (var item in results)
                 {
-                    Console.WriteLine(item.Stats());
+                    ui.Print(item.Stats());
                 }
             }
         }
-        public void ListVehicleByColorAndWheenum(string color, int wheelnum)
+        public void ListVehicleByColorAndWheenum(string color, int wheelnum, IUI ui)
         {
             var results = garage.Where(v => v != null && v.Color == color && v.WheelsNum == wheelnum).ToArray();
             if (results.Length == 0)
-                Console.WriteLine($"Vehicles with {color} color and {wheelnum} no. of wheels is not parked in Garage");
+                ui.Print($"\nVehicles with {color} color and {wheelnum} no. of wheels is not parked in Garage");
             else
             {
-
+                ui.Print($"\nVehicles with {color} color and wheel numbers {wheelnum}'s Lists: ");
                 foreach (var item in results)
                 {
-                    Console.WriteLine(item.Stats());
+                    ui.Print(item.Stats());
                 }
             }
         }
 
-        public void ListVehicleByLength(double length) //´rename lenght to minimum length
+        public void ListAllCars(IUI ui)
         {
-            bool found = false;
-            foreach (var item in garage)
+            var results = garage.Where(v => v is Car).ToArray();
+            if (results.Length == 0)
+                ui.Print("\nNo Car's Parked in the Garage");
+            else
             {
-                if (item is Boat b)
+                foreach (var item in results)
                 {
-                    if (b.Length >= length)
-                    {
-                        found = true;
-                        Console.WriteLine(b.Stats());
-                    }
-                }
+                    ui.Print("\n" + item.Stats());
 
+                }
             }
-            if (!found)
+        }
+
+        public void ListAllBus(IUI ui)
+        {
+            var results = garage.Where(v => v is Bus).ToArray();
+            if (results.Length == 0)
+                ui.Print("\nNo Bus's Parked in the Garage");
+            else
             {
-                { Console.WriteLine("Boat does not exist"); }
+                ui.Print("\n--- Bus Lists: ");
+                foreach (var item in results)
+                {
+                    ui.Print(item.Stats());
+
+                }
             }
+        }
+
+        public void ListAllBoat(IUI ui)
+        {
+            var results = garage.Where(v => v is Boat).ToArray();
+            if (results.Length == 0)
+                ui.Print("\nNo Boat's Parked in the Garage");
+            else
+            {
+                ui.Print("\n--- Boat Lists: ");
+                foreach (var item in results)
+                {
+                    ui.Print(item.Stats());
+
+                }
+            }
+        }
+
+        public void ListAllMotorcyckle(IUI ui)
+        {
+            var results = garage.Where(v => v is Motorcyckle).ToArray();
+            if (results.Length == 0)
+                ui.Print("\nNo Motorcyckle's Parked in the Garage");
+            else
+            {
+                ui.Print("\n--- Motorcyckle Lists: ");
+                foreach (var item in results)
+                {
+                    ui.Print(item.Stats());
+
+                }
+            }
+        }
+
+        public void ListAllAirplane(IUI ui)
+        {
+            var results = garage.Where(v => v is Airplane).ToArray();
+            if (results.Length == 0)
+                ui.Print("\nNo Airplane's Parked in the Garage");
+            else
+            {
+                ui.Print("\n--- Airplane Lists: ");
+                foreach (var item in results)
+                {
+                    ui.Print(item.Stats());
+
+                }
+            }
+        }
+
+
+        public void ListVehicleByLength(double length, IUI ui)
+        {
+            var results = garage.Where(v => v is Boat b && b.Length >= length).ToArray();
+            if (results.Length == 0)
+                ui.Print($"\nBoat with Minimum Length: {length} is not parked in the Garage");
+            else
+            {
+                ui.Print($"\nBoat with Minimum Length: {length} Lists: ");
+                foreach (var item in results)
+                {
+                    ui.Print(item.Stats());
+
+                }
+            }
+            //bool found = false;
+            //foreach (var item in garage)
+            //{
+            //    if (item is Boat b)
+            //    {
+            //        if (b.Length >= length)
+            //        {
+            //            found = true;
+            //            Console.WriteLine(b.Stats());
+            //        }
+            //    }
+
+            //}
+            //if (!found)
+            //{
+            //    { Console.WriteLine("Boat does not exist"); }
+            //}
 
         }
 
-        public void EmptyGarage()
+        public void EmptyGarage(IUI ui)
         {
             garage.EmptyGarage();
+            ui.Print("All the Vehicles are Removed from the Garage");
         }
     }
 }

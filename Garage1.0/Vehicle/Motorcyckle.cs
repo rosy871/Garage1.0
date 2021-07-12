@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage1._0
 {
-    class Motorcyckle: Vehicle
+   public class Motorcyckle: Vehicle
     {
         public int CylinderCapacity { get;  }
         public Motorcyckle(string name,string regnum, string color, int wheelnum, int cylindervol):base(name,regnum,color, wheelnum)
