@@ -81,12 +81,13 @@ namespace Garage1._0
 
                             break;
                         case "0":
+                            ui.Print("exiting sub menu....\n\n");
                             return;
                         // break;
 
 
                         default:
-                            ui.Print("fel input press(1,2,3,4)");
+                            ui.Print("fel input press(1,2,3,4,5)");
                             break;
                     }
                 }

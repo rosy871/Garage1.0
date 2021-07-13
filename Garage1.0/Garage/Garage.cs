@@ -25,16 +25,19 @@ namespace Garage1._0
 
         }
 
-        //public bool IsFull2()
-        //{
-        //    return true;
-        //}
-
-
+      
         public bool IsFull
         {
             get { return index >= Capacity; }
         }
+
+
+        public bool IsEmpty
+        {
+            get { return index <= 0; }
+        }
+
+
         public void AddVehicle(IVehicle veh)
         {
             vehicleArray[index] = veh;
@@ -42,14 +45,7 @@ namespace Garage1._0
             Console.WriteLine($"Vehicle {veh.RegisterNum} is parked in Garage");
         }
 
-        public bool IsEmpty
-        {
-            get { return index <= 0; }
-        }
-        public void EmptyGarage()
-        {
-            index = 0;
-        }
+
         public IVehicle RemoveVehicle(string regNum)
         {
 
@@ -64,57 +60,19 @@ namespace Garage1._0
             for (int i = ind; i < vehicleArray.Length - 1; i++)
             {
                 vehicleArray[i] = vehicleArray[i + 1];
-
             }
 
             vehicleArray[index - 1] = null;
             index--;
-            //Console.WriteLine(toBeRemoved.Stats());
-            //Console.WriteLine($"Vehicle {toBeRemoved.RegisterNum} is removed from Garage");
+           
             return toBeRemoved;
         }
 
-        //public void showParkedVehicle()
-        //{
-        //    Console.WriteLine("lenght of filled array : " + vehicleArray.Length);
-        //    for (int i = 0; i < index; i++)
-        //    {
-
-        //        Console.WriteLine(vehicleArray[i].Stats());
-        //    }
-
-        //}
-
-        //public IVehicle FindVehicle(string regnum)
-        //{
-        //    IVehicle toFind = vehicleArray.Where(v => v != null && v.RegisterNum == regnum).FirstOrDefault();
-        //    return toFind;
-
-        //}
-
-        //public IEnumerable<IVehicle> FindVehicleByColor(string color)
-        //{
-        //   var results = vehicleArray.Where(v => v != null && v.Color == color).ToArray();
-        //     return results;
-        //}
-
-        // //public Vehicle[] FindVehicleByColorAndWheelNum(string color, int wheelnum)
-        // public IEnumerable<IVehicle> FindVehicleByColorAndWheelNum(string color, int wheelnum)
-        //{
-        //    var results = vehicleArray.Where(v => v != null && v.Color == color && v.WheelsNum == wheelnum).ToArray();
-        //    return results;
-
-        //}
-
-
-        //void TaBort()
-        //{
-        //    var garage1 = new Garage<Vehicle>(5);
-        //    foreach (var vehicle in garage1)
-        //    {
-
-        //    }
-        //}
+        public void EmptyGarage()
+        {
+            index = 0;
+        }
+       
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -127,10 +85,7 @@ namespace Garage1._0
 
 
             }
-            //foreach (var item in vehicleArray)
-            //{
-            //    yield return item;
-            //}
+         
         }
 
 

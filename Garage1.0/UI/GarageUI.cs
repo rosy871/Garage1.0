@@ -31,7 +31,7 @@ namespace Garage1._0
                     + "\n4.  List all the Parked Vehicle with Vehicle Specification for ex color or wheelnum or both."
                     + "\n5.  List all the Boat whose length is greater or equal to provided length"
                     + "\n6.  List all Car or Bus or Boat or Motorcyckle or Airplane "
-                    + "\n7. Remove all the Parked Vehicles from the Garage "
+                    + "\n7.  Remove all the Parked Vehicles from the Garage "
                     + "\n0.  Exit the application");
                    
 
@@ -54,9 +54,6 @@ namespace Garage1._0
                         vui.ShowVehiclesWithSpecs(gh,ui);
                         break;
 
-                    //case "5":
-                    //    vui.ShowVehicleWithColorAndWheel(gh, ui);
-                    //    break;
 
                     case "5":
                         vui.ListVehicleByLength(gh, ui);
@@ -67,28 +64,13 @@ namespace Garage1._0
                         vui.ListAllVehicleWithName(gh,ui);
                         break;
 
-                    //case "8":
-                    //    gh.ListAllBus(ui);
-                    //    break;
-
-                    //case "9":
-                    //    gh.ListAllBoat(ui);
-                    //    break;
-
-                    //case "10":
-                    //    gh.ListAllMotorcyckle(ui);
-                    //    break;
-
-                    //case "11":
-                    //    gh.ListAllAirplane(ui);
-                    //    break;
-
+                  
                     case "7":
                         gh.EmptyGarage(ui);
                         break;
 
                     case "0":
-                        ui.Print("Exiting from main menu....");
+                        ui.Print("Exiting from main menu....\n\n");
                         Environment.Exit(0);
                         break;
                     default:
@@ -96,7 +78,7 @@ namespace Garage1._0
                         break;
                 }
 
-                Console.ReadKey();
+               
 
             }
         }
