@@ -36,7 +36,7 @@ namespace Garage1._0
                             VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
 
                             ui.PrintSL("Fuel Type:  ");
-                            string fuel = ui.GetInput();
+                            string fuel = Util.AskForString(ui);
 
                             Car c = new Car(name, reg, color, wheelnum, fuel);
                             gh.ParkVehicleinGarage(c, ui);
@@ -46,7 +46,7 @@ namespace Garage1._0
                         case "2":
                             VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
                             ui.PrintSL("Number of seats:  ");
-                            int seatnum = int.Parse(ui.GetInput());
+                            int seatnum = Util.AskForInt(ui);
 
                             Bus b = new Bus(name, reg, color, wheelnum, seatnum);
                             gh.ParkVehicleinGarage(b, ui);
@@ -55,7 +55,7 @@ namespace Garage1._0
                         case "3":
                             VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
                             ui.PrintSL("Length of Boat:  ");
-                            double length = double.Parse(ui.GetInput());
+                            double length = Util.AskForDouble(ui);
 
                             Boat bt = new Boat(name, reg, color, wheelnum, length);
                             gh.ParkVehicleinGarage(bt, ui);
@@ -64,7 +64,7 @@ namespace Garage1._0
                         case "4":
                             VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
                             ui.PrintSL("Number of Engines:  ");
-                            int enginenum = int.Parse(ui.GetInput());
+                            int enginenum = Util.AskForInt(ui);
 
                             Airplane ap = new Airplane(name, reg, color, wheelnum, enginenum);
                             gh.ParkVehicleinGarage(ap, ui);
@@ -74,7 +74,7 @@ namespace Garage1._0
 
                             VehicleCommonSpecification(out name, out reg, out color, out wheelnum, ui);
                             ui.PrintSL("Cylinder Capacity:  ");
-                            int cc = int.Parse(ui.GetInput());
+                            int cc = Util.AskForInt(ui);
 
                             Motorcyckle mc = new Motorcyckle(name, reg, color, wheelnum, cc);
                             gh.ParkVehicleinGarage(mc, ui);
@@ -95,21 +95,49 @@ namespace Garage1._0
             }
         }
 
+        internal void ListAllVehicleWithName(IGarageHandlar gh, IUI ui)
+        {
+            if (gh.GarageIsEmpty())
+            {
+                ui.Print("\nGarage is Empty.\n");
+                return;
+            }
+            ui.Print("Enter the type(Car, Boat, Bus, Airplane, Motorcyckle) of vehicle to list");
+            string str = Util.AskForString(ui);
+            str = (char.ToUpper(str[0]) + str.Substring(1));
+           // Console.WriteLine(str);
+
+            gh.ListAllVehicleWithName(ui,str);
+           
+
+        }
 
         private static void VehicleCommonSpecification(out string name, out string reg, out string color, out int wheelnum, IUI ui)
         {
             ui.PrintSL("Brand/Type:  ");
-            name = ui.GetInput();
+            name = Util.AskForString(ui);
 
             ui.PrintSL("Registration Number:  ");
-            reg = ui.GetInput().ToUpper();
+            reg = Util.AskForString(ui).ToUpper();
 
 
             ui.PrintSL("Color:  ");
-            color = ui.GetInput();
+            color = Util.AskForString(ui);
 
             ui.PrintSL("Number of wheel:  ");
-            wheelnum = int.Parse(ui.GetInput());
+            wheelnum = Util.AskForInt(ui);
+        }
+
+       public void ShowVehiclesWithSpecs(IGarageHandlar gh, IUI ui)
+        {
+            if (gh.GarageIsEmpty())
+            {
+                ui.Print("\nGarage is Empty.\n");
+                return;
+            }
+            ui.Print("Enter Vehicle Specification that you want to list for ex color, wheelno. ect");
+            string specs=ui.GetInput();
+            gh.ListVehicleBySpecs(specs);
         }
 
         public void ListVehicleByLength(IGarageHandlar gh, IUI ui)
@@ -125,35 +153,35 @@ namespace Garage1._0
             gh.ListVehicleByLength(length, ui);
         }
 
-        public void ShowVehicleWithColorAndWheel(IGarageHandlar gh, IUI ui)
-        {
-            if (gh.GarageIsEmpty())
-            {
-                ui.Print("\nGarage is Empty.");
-                return;
-            }
+        //public void ShowVehicleWithColorAndWheel(IGarageHandlar gh, IUI ui)
+        //{
+        //    if (gh.GarageIsEmpty())
+        //    {
+        //        ui.Print("\nGarage is Empty.");
+        //        return;
+        //    }
 
-            ui.PrintSL("Enter Color:  ");
-            string color = ui.GetInput();
-            ui.PrintSL("Enter Number of Wheels:  ");
-            int wheelnum = int.Parse(ui.GetInput());
+        //    ui.PrintSL("Enter Color:  ");
+        //    string color = ui.GetInput();
+        //    ui.PrintSL("Enter Number of Wheels:  ");
+        //    int wheelnum = int.Parse(ui.GetInput());
 
-            gh.ListVehicleByColorAndWheenum(color, wheelnum, ui);
-        }
+        //    gh.ListVehicleByColorAndWheenum(color, wheelnum, ui);
+        //}
 
-        public void ShowVehiclesWithColor(IGarageHandlar gh, IUI ui)
-        {
-            if (gh.GarageIsEmpty())
-            {
-                ui.Print("\nGarage is Empty.");
-                return;
-            }
+        //public void ShowVehiclesWithColor(IGarageHandlar gh, IUI ui)
+        //{
+        //    if (gh.GarageIsEmpty())
+        //    {
+        //        ui.Print("\nGarage is Empty.");
+        //        return;
+        //    }
 
-            ui.PrintSL("Enter Color:  ");
-            string color = ui.GetInput();
-            gh.ListVehicleByColor(color, ui);
+        //    ui.PrintSL("Enter Color:  ");
+        //    string color = ui.GetInput();
+        //    gh.ListVehicleByColor(color, ui);
 
-        }
+        //}
 
         public void RemoveVechicleFromGarage(IGarageHandlar gh, IUI ui)
         {

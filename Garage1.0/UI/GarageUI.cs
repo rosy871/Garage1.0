@@ -20,7 +20,7 @@ namespace Garage1._0
 
         public void StartProj()
         {
-            Console.WriteLine("testing for readline");
+           // Console.WriteLine("testing for readline");
             while (true)
             {
 
@@ -28,16 +28,12 @@ namespace Garage1._0
                     + "\n1.  List all the parked vehicles."
                     + "\n2.  Park vehicle in Garage."
                     + "\n3.  Remove Vehicle from the Garage."
-                    + "\n4.  List all the Parked Vehicle with Color"
-                    + "\n5.  List all the Parked Vechicle with Color and Wheels number "
-                    + "\n6.  List all the Boat whose length is greater or equal to provided length"
-                    + "\n7.  List all Car "
-                    + "\n8.  List all Bus"
-                    + "\n9.  List all Boat"
-                    + "\n10. List all Motorcyckle "
-                    + "\n11. List all Airplane"
-                    + "\n12. Remove all the Parked Vehicles from the Garage "
+                    + "\n4.  List all the Parked Vehicle with Vehicle Specification for ex color or wheelnum or both."
+                    + "\n5.  List all the Boat whose length is greater or equal to provided length"
+                    + "\n6.  List all Car or Bus or Boat or Motorcyckle or Airplane "
+                    + "\n7. Remove all the Parked Vehicles from the Garage "
                     + "\n0.  Exit the application");
+                   
 
 
 
@@ -55,47 +51,48 @@ namespace Garage1._0
                         break;
 
                     case "4":
-                        vui.ShowVehiclesWithColor(gh, ui);
+                        vui.ShowVehiclesWithSpecs(gh,ui);
                         break;
+
+                    //case "5":
+                    //    vui.ShowVehicleWithColorAndWheel(gh, ui);
+                    //    break;
 
                     case "5":
-                        vui.ShowVehicleWithColorAndWheel(gh, ui);
-                        break;
-
-                    case "6":
                         vui.ListVehicleByLength(gh, ui);
 
                         break;
 
+                    case "6":
+                        vui.ListAllVehicleWithName(gh,ui);
+                        break;
+
+                    //case "8":
+                    //    gh.ListAllBus(ui);
+                    //    break;
+
+                    //case "9":
+                    //    gh.ListAllBoat(ui);
+                    //    break;
+
+                    //case "10":
+                    //    gh.ListAllMotorcyckle(ui);
+                    //    break;
+
+                    //case "11":
+                    //    gh.ListAllAirplane(ui);
+                    //    break;
+
                     case "7":
-                        gh.ListAllCars(ui);
-                        break;
-
-                    case "8":
-                        gh.ListAllBus(ui);
-                        break;
-
-                    case "9":
-                        gh.ListAllBoat(ui);
-                        break;
-
-                    case "10":
-                        gh.ListAllMotorcyckle(ui);
-                        break;
-
-                    case "11":
-                        gh.ListAllAirplane(ui);
-                        break;
-
-                    case "12":
                         gh.EmptyGarage(ui);
                         break;
 
                     case "0":
+                        ui.Print("Exiting from main menu....");
                         Environment.Exit(0);
                         break;
                     default:
-                        ui.Print("Please Enter some Valid Input (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)\n");
+                        ui.Print("Please Enter some Valid Input (0, 1, 2, 3, 4, 5, 6, 7)\n");
                         break;
                 }
 

@@ -10,6 +10,7 @@ namespace Garage1._0
     {
         public string GetInput()
         {
+            //Check out Dimitris Utils-class
             return Console.ReadLine();
         }
 

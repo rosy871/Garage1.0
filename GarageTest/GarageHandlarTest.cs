@@ -47,24 +47,22 @@ namespace GarageTest
             gh.ParkVehicleinGarage(veh5, ui);
             Assert.IsTrue(gh.GarageIsFull());
 
-            gh.ListAllVehicle(ui);
+            //gh.ListAllVehicle(ui);
 
-            gh.RemoveVehiclefromGarage("aud123", ui);
-            gh.RemoveVehiclefromGarage("air999", ui);//non exixtent regnum
+            //gh.RemoveVehiclefromGarage("aud123", ui);
+            //gh.RemoveVehiclefromGarage("air999", ui);//non exixtent regnum
 
-            gh.ListAllBoat(ui);
-            gh.ListAllBus(ui);
-            gh.ListAllCars(ui);
-            gh.ListAllAirplane(ui);
-            gh.ListAllMotorcyckle(ui);
+           
+            //gh.ListAllVehicleWithName(ui, "Boat");
+           
 
-            gh.ListVehicleByColorAndWheenum("red", 2, ui);
-            gh.ListVehicleByColor("red", ui);
-            gh.ListVehicleByLength(5, ui);
+          
+            //gh.ListVehicleByLength(5, ui);
 
         }
 
-    }
+       
+        }
 
 }
 

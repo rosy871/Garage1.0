@@ -52,6 +52,9 @@ namespace Garage1._0
         }
         public IVehicle RemoveVehicle(string regNum)
         {
+
+            //vehicleArray = vehicleArray.Where(v => v.RegisterNum != regNum).ToArray();
+
             var toBeRemoved = vehicleArray.Where(v => v != null && v.RegisterNum == regNum).FirstOrDefault();
             if (toBeRemoved == null)
                 return toBeRemoved;

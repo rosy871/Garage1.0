@@ -18,10 +18,11 @@ namespace GarageTest
             string regnum = "abc123";
             string color = "red";
             int wheelnum = 4;
-            var vechile = new Vehicle(name, regnum, color, wheelnum);
+            string fuel = "deisel";
+            var vechile = new Car(name, regnum, color, wheelnum,fuel);
             string actual = vechile.Stats();
-
-            string expected = $"Name : {name,-11} Register Number : {regnum,-10} color : {color,-10} No. of Wheels : {wheelnum,-5}  ";
+           
+            string expected = $"Name : {name,-11} Register Number : {regnum,-10} color : {color,-10} No. of Wheels : {wheelnum,-5} FuelType : {fuel,10}";
             string notexpcted = "blablabla";
 
             Assert.AreEqual(expected, actual);
